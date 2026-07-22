@@ -776,16 +776,15 @@ st.markdown("""
     <path class="vein-path" d="M0 20 Q150 0 300 20 T600 20 T900 20 T1200 20" />
 </svg>
 """, unsafe_allow_html=True)
+import traceback
 
 try:
     model, class_names = load_assets()
     model_ready = True
-except Exception:
+except Exception as e:
     model_ready = False
-    st.error(
-        "Could not load model files. Make sure 'crop_disease_model.h5' and "
-        "'class_names.json' are in the same folder as this app.py."
-    )
+    st.error("Could not load model files. Real error below:")
+    st.code(traceback.format_exc(), language="python")
 
 # =========================================================================
 # ABOUT MY AI
